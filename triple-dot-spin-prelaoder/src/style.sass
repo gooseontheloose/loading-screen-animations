@@ -1,0 +1,104 @@
+$primary-color: #4285F4
+$scale: 3
+$squareSize: 50px
+$cornerSize: ceil($squareSize / $scale)
+$cornerPosition: ceil($cornerSize / $scale)
+
+body
+  margin: 0
+  padding: 0
+  height: 100vh
+  width: 100vw
+ 
+
+@keyframes dyinglight
+  15%
+    transform: scale(1.6)
+  50%
+    transform: rotate(-178deg)
+  100%
+    transform: rotate(-180deg)
+  
+@keyframes dyinglightBox
+  15%
+    transform: scale(.6)
+  50%
+    transform: rotate(178deg)
+  100%
+    transform: rotate(180deg)
+
+.dl
+  position: absolute
+  left: 50%
+  top: 50%
+  transform: translate(-50%, -50%)
+  display: inline-block
+
+.dl__square
+  display: block
+  animation: dyinglightBox 1.6s ease infinite
+  width: $squareSize
+  height: $squareSize
+  background: $primary-color
+  border-radius: 50% /* Make it a circle */
+  margin: 10px
+  
+  
+  &:nth-child(2)
+    animation: dyinglightBox 1.6s ease 0.4s infinite /* 0s delay for the first dot */
+
+  &:nth-child(3)
+    animation: dyinglightBox 1.6s ease 0.8s infinite /* 0.4s delay for the second dot */
+
+  &:nth-child(4)
+    animation: dyinglightBox 1.6s ease 1.2s infinite /* 0.8s delay for the third dot */
+
+  
+
+.dl__container
+  position: absolute
+  left: 0
+  top: 0
+  bottom: 0
+  right: 0
+  transform-origin: 50% 50% 0
+  animation: dyinglight 1.6s ease infinite
+  backface-visibility: hidden
+
+
+.dl__corner--top:before,
+.dl__corner--top:after,
+.dl__corner--bottom:before,
+.dl__corner--bottom:after
+  position: absolute
+  width: $cornerSize
+  height: $cornerSize
+  color: $primary-color
+  content: ''
+    border-radius: 50% /* Make it a circle */
+
+
+.dl__corner--top
+  &:before
+    border-left: 1px solid
+    border-top: 1px solid
+    top: -$cornerPosition
+    left: -$cornerPosition
+
+  &:after
+    border-right: 1px solid
+    border-top: 1px solid
+    top: -$cornerPosition
+    right: -$cornerPosition
+
+.dl__corner--bottom
+  &:before
+    border-left: 1px solid
+    border-bottom: 1px solid
+    bottom: -$cornerPosition
+    left: -$cornerPosition
+  &:after
+    border-right: 1px solid
+    border-bottom: 1px solid
+    bottom: -$cornerPosition
+    right: -$cornerPosition
